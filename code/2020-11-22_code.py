@@ -1,10 +1,22 @@
-#2020-11-20_code.py
+#2020-11-22_code.py
 
 import time
 import board
 import neopixel
 
 from cedargrove_nau7802 import NAU7802
+
+import displayio
+import terminalio
+from adafruit_display_text import label
+import adafruit_displayio_ssd1306
+
+displayio.release_displays()
+
+i2c = board.I2C()
+display_bus = displayio.I2CDisplay(i2c, device_address=0x3C)
+display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=128, height=32)
+
 
 pixel = neopixel.NeoPixel(board.NEOPIXEL, 1)
 pixel[0] = (4, 0, 4)
@@ -36,9 +48,10 @@ pixel[0] = (0, 4, 0)
 while True:
     if nau7802.available:
         value = nau7802.read()
-        mass = (value - zero - tare) * (2.268 / 4800)
-        print((round(mass, 3), ))
+        mass = round((value - zero - tare) * (2.268 / 4800), 3)
+        mass_oz = round(mass * 0.03527, 4)
+        print('(%+6.3f, %+2.4f)' % (mass, mass_oz))
     else:
         print('not available')
 
-    time.sleep(5)
+    time.sleep(1)
