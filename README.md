@@ -1,4 +1,4 @@
-# NAU7802_Dual_24-bit_ADC_FeatherWing
+# NAU7802_24-bit_ADC_FeatherWing
 
 ### Custom 24-bit load cell sensor ADC with dual analog inputs powered by CircuitPython.
 
