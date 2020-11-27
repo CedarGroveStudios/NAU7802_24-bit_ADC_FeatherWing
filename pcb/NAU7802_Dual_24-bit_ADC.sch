@@ -5,8 +5,8 @@ $Descr USLetter 11000 8500
 encoding utf-8
 Sheet 1 1
 Title "NAU7802_DUAL_24-BIT_ADC_WING"
-Date "2020-10-21"
-Rev "v00"
+Date "2020-11-26"
+Rev "v01"
 Comp "Cedar Grove Studios"
 Comment1 ""
 Comment2 ""
@@ -281,28 +281,6 @@ F 3 "~" H 9800 2950 50  0001 C CNN
 	1    9800 2950
 	1    0    0    1   
 $EndComp
-$Comp
-L Connector_Generic:Conn_01x04 J1
-U 1 1 5F8EBC17
-P 2925 2825
-F 0 "J1" H 2950 3125 50  0000 C CNN
-F 1 "CELL_A" H 2875 3050 50  0000 C CNN
-F 2 "Connector_JST:JST_PH_S4B-PH-SM4-TB_1x04-1MP_P2.00mm_Horizontal" H 2925 2825 50  0001 C CNN
-F 3 "~" H 2925 2825 50  0001 C CNN
-	1    2925 2825
-	-1   0    0    -1  
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x04 J2
-U 1 1 5F8EC4A7
-P 2925 3600
-F 0 "J2" H 2950 3900 50  0000 C CNN
-F 1 "CELL_B" H 2875 3825 50  0000 C CNN
-F 2 "Connector_JST:JST_PH_S4B-PH-SM4-TB_1x04-1MP_P2.00mm_Horizontal" H 2925 3600 50  0001 C CNN
-F 3 "~" H 2925 3600 50  0001 C CNN
-	1    2925 3600
-	-1   0    0    -1  
-$EndComp
 Wire Wire Line
 	3825 3025 3825 3300
 Wire Wire Line
@@ -337,7 +315,7 @@ Wire Wire Line
 	3650 3600 3650 4150
 Text Notes 9600 3175 0    50   ~ 0
 jst-sh
-Text Notes 2875 3225 0    50   ~ 0
+Text Notes 2875 3175 0    50   ~ 0
 jst-ph
 $Comp
 L Device:LED D1
@@ -407,7 +385,7 @@ L Device:R_Small R5
 U 1 1 5F96C4C8
 P 9175 5475
 F 0 "R5" H 9075 5425 50  0000 C CNN
-F 1 "4.7K" H 9050 5500 50  0000 C CNN
+F 1 "1K" H 9050 5500 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" H 9175 5475 50  0001 C CNN
 F 3 "~" H 9175 5475 50  0001 C CNN
 	1    9175 5475
@@ -700,4 +678,42 @@ Text Label 4875 3400 0    50   ~ 0
 B-
 Text Label 4875 3500 0    50   ~ 0
 B+
+Text Notes 2700 2775 0    50   ~ 0
+RED
+Text Notes 2700 2975 0    50   ~ 0
+GRN
+Text Notes 2700 2875 0    50   ~ 0
+BLK
+Text Notes 2700 3075 0    50   ~ 0
+WHT
+Text Notes 2700 3550 0    50   ~ 0
+RED
+Text Notes 2700 3750 0    50   ~ 0
+GRN
+Text Notes 2700 3650 0    50   ~ 0
+BLK
+Text Notes 2700 3850 0    50   ~ 0
+WHT
+$Comp
+L Connector_Generic:Conn_01x04 J1
+U 1 1 5F8EBC17
+P 2925 2825
+F 0 "J1" H 2950 3125 50  0000 C CNN
+F 1 "CELL_A" H 2875 3050 50  0000 C CNN
+F 2 "Connector_JST:JST_PH_S4B-PH-SM4-TB_1x04-1MP_P2.00mm_Horizontal" H 2925 2825 50  0001 C CNN
+F 3 "~" H 2925 2825 50  0001 C CNN
+	1    2925 2825
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x04 J2
+U 1 1 5F8EC4A7
+P 2925 3600
+F 0 "J2" H 2950 3900 50  0000 C CNN
+F 1 "CELL_B" H 2875 3825 50  0000 C CNN
+F 2 "Connector_JST:JST_PH_S4B-PH-SM4-TB_1x04-1MP_P2.00mm_Horizontal" H 2925 3600 50  0001 C CNN
+F 3 "~" H 2925 3600 50  0001 C CNN
+	1    2925 3600
+	-1   0    0    -1  
+$EndComp
 $EndSCHEMATC

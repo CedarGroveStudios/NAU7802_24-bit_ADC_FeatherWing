@@ -91,7 +91,8 @@ class NAU7802:
         self.conversion_rate =   10   # 10 SPS
         self._adc_chop_clock =  0x3   # 0x3 = Disable chopper clock
         self._pga_ldo_mode   =  0x0   # 0x0 = Use low ESR capacitors
-        self._pc_cap_enable  =  0x1   # 0x1 = Enable PGA out stabilizer cap for single channel use
+        #self._pc_cap_enable  =  0x1   # 0x1 = Enable PGA out stabilizer cap for single channel use
+        self._pc_cap_enable  =  0x0   # 0x0 = Disable PGA out stabilizer cap for dual channel use
 
         #self._i2c = 0x02  # enable temp sensor as input
         #self._pga = 0x01  # disable chopper
