@@ -680,19 +680,19 @@ Text Label 4875 3500 0    50   ~ 0
 B+
 Text Notes 2700 2775 0    50   ~ 0
 RED
-Text Notes 2700 2975 0    50   ~ 0
+Text Notes 2700 3075 0    50   ~ 0
 GRN
 Text Notes 2700 2875 0    50   ~ 0
 BLK
-Text Notes 2700 3075 0    50   ~ 0
+Text Notes 2700 2975 0    50   ~ 0
 WHT
 Text Notes 2700 3550 0    50   ~ 0
 RED
-Text Notes 2700 3750 0    50   ~ 0
+Text Notes 2700 3850 0    50   ~ 0
 GRN
 Text Notes 2700 3650 0    50   ~ 0
 BLK
-Text Notes 2700 3850 0    50   ~ 0
+Text Notes 2700 3750 0    50   ~ 0
 WHT
 $Comp
 L Connector_Generic:Conn_01x04 J1

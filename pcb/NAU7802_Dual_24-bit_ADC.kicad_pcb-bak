@@ -1385,7 +1385,7 @@
   )
 
   (module Adafruit:NAU7802_TEXT_LOGO_22_6x2_1mm (layer F.Cu) (tedit 5F90DED9) (tstamp 5F913FD7)
-    (at 156.718 94.869)
+    (at 156.7815 94.7293)
     (fp_text reference G*** (at 0 3.175) (layer F.Fab) hide
       (effects (font (size 0.5 0.5) (thickness 0.1)))
     )
