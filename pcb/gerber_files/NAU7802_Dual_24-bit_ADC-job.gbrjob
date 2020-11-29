@@ -7,7 +7,7 @@
       "Application": "Pcbnew",
       "Version":     "(5.1.6-0-10_14)"
     },
-    "CreationDate":  "2020-11-27T00:00:53-08:00"
+    "CreationDate":  "2020-11-28T13:39:01-08:00"
   },
   "GeneralSpecs":
   {
@@ -15,7 +15,7 @@
     {
       "Name": "NAU7802_Dual_24-bit_ADC",
       "GUID": "4e415537-3830-4325-9f44-75616c5f3234",
-      "Revision": "v01"
+      "Revision": "v02"
     },
     "Size":
     {

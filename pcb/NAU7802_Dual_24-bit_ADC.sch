@@ -5,8 +5,8 @@ $Descr USLetter 11000 8500
 encoding utf-8
 Sheet 1 1
 Title "NAU7802_DUAL_24-BIT_ADC_WING"
-Date "2020-11-26"
-Rev "v01"
+Date "2020-11-28"
+Rev "v02"
 Comp "Cedar Grove Studios"
 Comment1 ""
 Comment2 ""
@@ -291,31 +291,23 @@ Wire Wire Line
 	3825 4075 3925 4075
 Wire Wire Line
 	3475 3500 3475 2725
-Wire Wire Line
-	3475 2300 4850 2300
 Connection ~ 4850 2300
-Connection ~ 3475 2725
-Wire Wire Line
-	3475 2725 3475 2300
 Wire Wire Line
 	3650 2825 3650 3600
 $Comp
 L power:GND #PWR01
 U 1 1 5F911CA6
-P 3650 4150
-F 0 "#PWR01" H 3650 3900 50  0001 C CNN
-F 1 "GND" H 3655 3977 50  0000 C CNN
-F 2 "" H 3650 4150 50  0001 C CNN
-F 3 "" H 3650 4150 50  0001 C CNN
-	1    3650 4150
+P 3475 4150
+F 0 "#PWR01" H 3475 3900 50  0001 C CNN
+F 1 "GND" H 3480 3977 50  0000 C CNN
+F 2 "" H 3475 4150 50  0001 C CNN
+F 3 "" H 3475 4150 50  0001 C CNN
+	1    3475 4150
 	1    0    0    -1  
 $EndComp
-Connection ~ 3650 3600
-Wire Wire Line
-	3650 3600 3650 4150
 Text Notes 9600 3175 0    50   ~ 0
 jst-sh
-Text Notes 2875 3175 0    50   ~ 0
+Text Notes 2875 3150 0    50   ~ 0
 jst-ph
 $Comp
 L Device:LED D1
@@ -433,7 +425,7 @@ Wire Wire Line
 Connection ~ 8175 5925
 Wire Wire Line
 	8175 5925 8350 5925
-Text Notes 2900 3950 0    50   ~ 0
+Text Notes 2875 3925 0    50   ~ 0
 jst-ph
 $Comp
 L Connector_Generic:Conn_01x04 J4
@@ -642,7 +634,7 @@ F 3 "" H 8175 5375 50  0001 C CNN
 	1    8175 5375
 	1    0    0    -1  
 $EndComp
-Text Label 3150 2725 0    50   ~ 0
+Text Label 3150 2825 0    50   ~ 0
 AVDD
 Text Label 3150 2925 0    50   ~ 0
 CELL_A-
@@ -663,12 +655,10 @@ Wire Wire Line
 Wire Wire Line
 	3125 3500 3475 3500
 Wire Wire Line
-	3125 3600 3650 3600
-Wire Wire Line
 	3125 3700 3925 3700
 Wire Wire Line
 	3125 3800 3825 3800
-Text Label 3150 3500 0    50   ~ 0
+Text Label 3150 3600 0    50   ~ 0
 AVDD
 Text Label 4875 3200 0    50   ~ 0
 A-
@@ -678,42 +668,55 @@ Text Label 4875 3400 0    50   ~ 0
 B-
 Text Label 4875 3500 0    50   ~ 0
 B+
-Text Notes 2700 2775 0    50   ~ 0
+Text Notes 2675 2850 0    50   ~ 0
 RED
-Text Notes 2700 3075 0    50   ~ 0
+Text Notes 2675 3050 0    50   ~ 0
 GRN
-Text Notes 2700 2875 0    50   ~ 0
+Text Notes 2675 2750 0    50   ~ 0
 BLK
-Text Notes 2700 2975 0    50   ~ 0
+Text Notes 2675 2950 0    50   ~ 0
 WHT
-Text Notes 2700 3550 0    50   ~ 0
+Text Notes 2675 3625 0    50   ~ 0
 RED
-Text Notes 2700 3850 0    50   ~ 0
+Text Notes 2675 3825 0    50   ~ 0
 GRN
-Text Notes 2700 3650 0    50   ~ 0
+Text Notes 2675 3525 0    50   ~ 0
 BLK
-Text Notes 2700 3750 0    50   ~ 0
+Text Notes 2675 3725 0    50   ~ 0
 WHT
-$Comp
-L Connector_Generic:Conn_01x04 J1
-U 1 1 5F8EBC17
-P 2925 2825
-F 0 "J1" H 2950 3125 50  0000 C CNN
-F 1 "CELL_A" H 2875 3050 50  0000 C CNN
-F 2 "Connector_JST:JST_PH_S4B-PH-SM4-TB_1x04-1MP_P2.00mm_Horizontal" H 2925 2825 50  0001 C CNN
-F 3 "~" H 2925 2825 50  0001 C CNN
-	1    2925 2825
-	-1   0    0    -1  
-$EndComp
 $Comp
 L Connector_Generic:Conn_01x04 J2
 U 1 1 5F8EC4A7
-P 2925 3600
-F 0 "J2" H 2950 3900 50  0000 C CNN
-F 1 "CELL_B" H 2875 3825 50  0000 C CNN
-F 2 "Connector_JST:JST_PH_S4B-PH-SM4-TB_1x04-1MP_P2.00mm_Horizontal" H 2925 3600 50  0001 C CNN
-F 3 "~" H 2925 3600 50  0001 C CNN
-	1    2925 3600
-	-1   0    0    -1  
+P 2925 3700
+F 0 "J2" H 2925 3325 50  0000 C CNN
+F 1 "CELL_B" H 2850 3400 50  0000 C CNN
+F 2 "Connector_JST:JST_PH_S4B-PH-SM4-TB_1x04-1MP_P2.00mm_Horizontal" H 2925 3700 50  0001 C CNN
+F 3 "~" H 2925 3700 50  0001 C CNN
+	1    2925 3700
+	-1   0    0    1   
 $EndComp
+$Comp
+L Connector_Generic:Conn_01x04 J1
+U 1 1 5F8EBC17
+P 2925 2925
+F 0 "J1" H 2925 2550 50  0000 C CNN
+F 1 "CELL_A" H 2850 2625 50  0000 C CNN
+F 2 "Connector_JST:JST_PH_S4B-PH-SM4-TB_1x04-1MP_P2.00mm_Horizontal" H 2925 2925 50  0001 C CNN
+F 3 "~" H 2925 2925 50  0001 C CNN
+	1    2925 2925
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3650 2300 4850 2300
+Wire Wire Line
+	3650 2300 3650 2825
+Connection ~ 3650 2825
+Wire Wire Line
+	3125 3600 3650 3600
+Wire Wire Line
+	3475 3500 3475 4150
+Connection ~ 3475 3500
+Text Label 3650 2300 0    50   ~ 0
+AVDD
+NoConn ~ 2525 7025
 $EndSCHEMATC
