@@ -12,4 +12,4 @@
 
 ![Clue_Scale](https://github.com/CedarGroveStudios/NAU7802_24-bit_ADC_FeatherWing/blob/main/graphics/Clue_Scale_2020-11-25_trim.png)
 
-Needing a calibration weight? The U.S. Mint coin specifications may help: https://www.usmint.gov/learn/coin-and-medal-programs/coin-specifications
+Needing a calibration weight? The U.S. Mint coin specifications might have some information that could help -- if you have some spare change. https://www.usmint.gov/learn/coin-and-medal-programs/coin-specifications
