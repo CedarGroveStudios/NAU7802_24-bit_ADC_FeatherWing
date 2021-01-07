@@ -1,6 +1,6 @@
 # Clue Scale Calibration
 # Cedar Grove NAU7802 FeatherWing example
-# 2020-12-23 v01 Cedar Grove Studios
+# 2021-01-07 v01 Cedar Grove Studios
 
 import board
 import time
@@ -12,7 +12,7 @@ clue.pixel[0] = (16, 0, 16)  # Set status indicator to purple during instantiati
 
 DEFAULT_CHAN =    1  # Select load cell channel input; channel A=1, channel B=2
 SAMPLE_AVG   = 1000  # Number of sample values to average
-DEFAULT_GAIN =   64  # Default gain for internal PGA
+DEFAULT_GAIN =  128  # Default gain for internal PGA
 
 # Instantiate 24-bit load sensor ADC
 nau7802 = NAU7802(board.I2C(), address=0x2A, active_channels=2)
@@ -55,14 +55,16 @@ clue.pixel[0] = (0, 16, 0)            # Set status indicator to green
 clue.play_tone(1660, 0.15)
 clue.play_tone(1440, 0.15)
 
-print("Place the calibration weight on the Chan_A load cell")
-print("To re-zero the load cell, remove the weight and press B")
+print('GAIN:', DEFAULT_GAIN)
+print('Place the calibration weight on the Chan_A load cell')
+print('To re-zero the load cell, remove the weight and press B')
 
 ### Main loop: Read load cell and display raw value
 #     Monitor Zeroing button
 while True:
     value   = read(SAMPLE_AVG)
-    print('   raw value:', value, hex(value))
+    print(' RAW VALUE: %7.0f  Percent of full-scale at gain x%3.0f : %3.2f: '
+          % (value, DEFAULT_GAIN, (value / ((2 ** 23) - 1)) * 100))
     time.sleep(0.1)
 
     if clue.button_b:
