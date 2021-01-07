@@ -1,6 +1,6 @@
 # Clue Scale
 # Cedar Grove NAU7802 FeatherWing example
-# 2020-11-27 v01 Cedar Grove Studios
+# 2021-01-07 v01 Cedar Grove Studios
 
 #import clue_scale_calibrate  # uncomment to run calibration method
 import board
@@ -16,15 +16,15 @@ from   cedargrove_nau7802 import NAU7802
 
 clue.pixel[0] = (16, 0, 16)  # Set status indicator to purple during instantiation phase
 
-DEFAULT_CHAN = 1   # Select load cell channel input; channel A=1, channel B=2
-SAMPLE_AVG = 100   # Number of sample values to average
-MAX_GR = 100       # Maximum (full-scale) display range in grams
-MIN_GR = ((MAX_GR // 5 ) * -1)  # Calculated minimum display value
-DEFAULT_GAIN = 64  # Default gain for internal PGA
+DEFAULT_CHAN =   1  # Select load cell channel input; channel A=1, channel B=2
+SAMPLE_AVG   = 100  # Number of sample values to average
+MAX_GR       = 100  # Maximum (full-scale) display range in grams
+MIN_GR       = ((MAX_GR // 5 ) * -1)  # Calculated minimum display value
+DEFAULT_GAIN = 128  # Default gain for internal PGA
 
 # Load cell dime-weight calibration ratio; 2.268 oz / ADC_raw_measurement
 # Obtained emperically; individual load cell dependent
-CALIB_RATIO = 2.268 / 2506  # load cell serial# 4540-02 for gain x64
+CALIB_RATIO = 100 / 215300  # 100g at gain x128 for load cell serial#4540-02
 
 # Instantiate 24-bit load sensor ADC
 nau7802 = NAU7802(board.I2C(), address=0x2A, active_channels=2)
