@@ -1,8 +1,8 @@
-# Clue Scale
+# Clue Scale -- dual channel version
 # Cedar Grove NAU7802 FeatherWing example
 # 2021-01-07 v01 Cedar Grove Studios
 
-#import clue_scale_calibrate  # uncomment to run calibration method
+#import clue_scale_calibrate  # uncomment to run calibration method for channel A
 import board
 import time
 from   simpleio                       import map_range
@@ -24,8 +24,8 @@ DEFAULT_GAIN = 128  # Default gain for internal PGA
 
 # Load cell dime-weight calibration ratio; 2.268 oz / ADC_raw_measurement
 # Obtained emperically; individual load cell dependent
-CALIB_RATIO = 100 / 215300  # 100g at gain x128 for load cell serial#4540-02
-
+CALIB_RATIO_1 = 100 / 215300  # 100g at gain x128 for load cell serial#4540-02 attached to chan A
+CALIB_RATIO_2 = 100 / 215300  # 100g at gain x128 for load cell serial#4540-02 attached to chan B
 # Instantiate 24-bit load sensor ADC
 nau7802 = NAU7802(board.I2C(), address=0x2A, active_channels=2)
 
@@ -41,7 +41,7 @@ FONT_2 = bitmap_font.load_font('/fonts/OpenSans-9.bdf')
 # Define displayio background and group elements
 print('*** Define displayio background and group elements')
 # Bitmap background
-_bkg = open('/clue_scale_bkg.bmp', 'rb')
+_bkg = open('/clue_scale_dual_chan_bkg.bmp', 'rb')
 bkg = displayio.OnDiskBitmap(_bkg)
 try:
     _background = displayio.TileGrid(bkg, pixel_shader=displayio.ColorConverter(),
@@ -102,48 +102,48 @@ plus_4_value.anchor_point      = (1.0, 0.5)
 plus_4_value.anchored_position = (105, 40)
 scale_group.append(plus_4_value)
 
-grams_label = Label(FONT_0, text='grams', color=clue.BLUE, max_glyphs=6)
-grams_label.anchor_point      = (1.0, 0)
-grams_label.anchored_position = (90, 216)
-scale_group.append(grams_label)
+chan_1_label = Label(FONT_0, text='grams', color=clue.BLUE, max_glyphs=6)
+chan_1_label.anchor_point      = (1.0, 0)
+chan_1_label.anchored_position = (90, 216)
+scale_group.append(chan_1_label)
 
-ounces_label = Label(FONT_0, text='ounces', color=clue.BLUE, max_glyphs=6)
-ounces_label.anchor_point      = (1.0, 0)
-ounces_label.anchored_position = (230, 216)
-scale_group.append(ounces_label)
+chan_2_label = Label(FONT_0, text='grams', color=clue.BLUE, max_glyphs=6)
+chan_2_label.anchor_point      = (1.0, 0)
+chan_2_label.anchored_position = (230, 216)
+scale_group.append(chan_2_label)
 
-mass_gr_value = Label(FONT_0, text='0.00', color=clue.WHITE, max_glyphs=10)
-mass_gr_value.anchor_point      = (1.0, 0.5)
-mass_gr_value.anchored_position = (90, 200)
-scale_group.append(mass_gr_value)
+chan_1_value = Label(FONT_0, text='0.00', color=clue.WHITE, max_glyphs=10)
+chan_1_value.anchor_point      = (1.0, 0.5)
+chan_1_value.anchored_position = (90, 200)
+scale_group.append(chan_1_value)
 
-mass_oz_value = Label(FONT_0, text='0.000', color=clue.WHITE, max_glyphs=10)
-mass_oz_value.anchor_point      = (1.0, 0.5)
-mass_oz_value.anchored_position = (230, 200)
-scale_group.append(mass_oz_value)
+chan_2_value = Label(FONT_0, text='0.00', color=clue.WHITE, max_glyphs=10)
+chan_2_value.anchor_point      = (1.0, 0.5)
+chan_2_value.anchored_position = (230, 200)
+scale_group.append(chan_2_value)
 
-tare_gr_label = Label(FONT_1, text='tare', color=clue.BLUE, max_glyphs=4)
-tare_gr_label.anchor_point      = (1.0, 0.5)
-tare_gr_label.anchored_position = (80, 114)
-scale_group.append(tare_gr_label)
+chan_1_tare_label = Label(FONT_1, text='tare', color=clue.BLUE, max_glyphs=4)
+chan_1_tare_label.anchor_point      = (1.0, 0.5)
+chan_1_tare_label.anchored_position = (80, 114)
+scale_group.append(chan_1_tare_label)
 
-tare_gr_value = Label(FONT_1, text='0.00', color=clue.CYAN, max_glyphs=10)
-tare_gr_value.anchor_point      = (1.0, 0.5)
-tare_gr_value.anchored_position = (84, 94)
-scale_group.append(tare_gr_value)
+chan_1_tare_value = Label(FONT_1, text='0.00', color=clue.CYAN, max_glyphs=10)
+chan_1_tare_value.anchor_point      = (1.0, 0.5)
+chan_1_tare_value.anchored_position = (84, 94)
+scale_group.append(chan_1_tare_value)
 
-tare_oz_label = Label(FONT_1, text='tare', color=clue.BLUE, max_glyphs=4)
-tare_oz_label.anchor_point      = (1.0, 0.5)
-tare_oz_label.anchored_position = (224, 114)
-scale_group.append(tare_oz_label)
+chan_2_label = Label(FONT_1, text='tare', color=clue.BLUE, max_glyphs=4)
+chan_2_label.anchor_point      = (1.0, 0.5)
+chan_2_label.anchored_position = (224, 114)
+scale_group.append(chan_2_label)
 
-tare_oz_value = Label(FONT_1, text='0.000', color=clue.CYAN, max_glyphs=10)
-tare_oz_value.anchor_point      = (1.0, 0.5)
-tare_oz_value.anchored_position = (224, 94)
-scale_group.append(tare_oz_value)
+chan_2_tare_value = Label(FONT_1, text='0.00', color=clue.CYAN, max_glyphs=10)
+chan_2_tare_value.anchor_point      = (1.0, 0.5)
+chan_2_tare_value.anchored_position = (224, 94)
+scale_group.append(chan_2_tare_value)
 
 # Define moveable bubble
-indicator_group = displayio.Group(max_size=1)
+indicator_group = displayio.Group(max_size=2)
 indicator_bubble = Circle(120, 200, 8, fill=clue.YELLOW, outline=clue.YELLOW, stroke=2)
 indicator_group.append(indicator_bubble)
 
@@ -169,7 +169,7 @@ def select_channel(channel=1):
     return
 
 def get_tare(value=None):
-    # Measure and store tare weight; return raw, grams, and ounces values
+    # Measure and store tare weight of current channel; return raw, grams, and ounces values
     if value is None:
         # Read average of 100 samples and store raw tare offset
         tare_offset = read(100)
