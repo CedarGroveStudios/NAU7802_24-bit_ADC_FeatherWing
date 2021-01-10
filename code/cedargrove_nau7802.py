@@ -1,8 +1,8 @@
 # cedargrove_nau7802.py
-# 2020-11-28 v01.2
+# 2021-01-10 v01.3
 # Device driver library for the CedarGrove NAU7802 24-bit ADC FeatherWing
 # with dual analog inputs
-# Will work with SparkFun Quiic Scale with single analog input
+# Also tested with SparkFun Quiic Scale board using a single analog input
 
 import time
 import struct
@@ -36,7 +36,7 @@ class LDOVoltage:
     LDO_2V4 = const(0x7)  # LDO 2.4 volts; _CTRL1[5:3] = 7
 
 class Gain:
-    GAIN_X1   = const(0x0)  # Gain X1; _CTRL1[2:0] = 0 (default)
+    GAIN_X1   = const(0x0)  # Gain X1; _CTRL1[2:0] = 0 (chip default)
     GAIN_X2   = const(0x1)  # Gain X1; _CTRL1[2:0] = 1
     GAIN_X4   = const(0x2)  # Gain X1; _CTRL1[2:0] = 2
     GAIN_X8   = const(0x3)  # Gain X1; _CTRL1[2:0] = 3
@@ -46,21 +46,21 @@ class Gain:
     GAIN_X128 = const(0x7)  # Gain X1; _CTRL1[2:0] = 7
 
 class ConversionRate:
-    RATE_10SPS  = const(0x0)  #  10 samples/sec; _CTRL2[6:4] = 0 (default)
+    RATE_10SPS  = const(0x0)  #  10 samples/sec; _CTRL2[6:4] = 0 (chip default)
     RATE_20SPS  = const(0x1)  #  20 samples/sec; _CTRL2[6:4] = 1
     RATE_40SPS  = const(0x2)  #  40 samples/sec; _CTRL2[6:4] = 2
     RATE_80SPS  = const(0x3)  #  80 samples/sec; _CTRL2[6:4] = 3
     RATE_320SPS = const(0x7)  # 320 samples/sec; _CTRL2[6:4] = 7
 
 class CalibrationMode:
-    INTERNAL = const(0x0)  # Offset Calibration Internal; _CTRL2[1:0] = 0 (default)
+    INTERNAL = const(0x0)  # Offset Calibration Internal; _CTRL2[1:0] = 0 (chip default)
     OFFSET   = const(0x2)  # Offset Calibration System;   _CTRL2[1:0] = 2
     GAIN     = const(0x3)  # Gain   Calibration System;   _CTRL2[1:0] = 3
 
 class NAU7802:
     def __init__(self, i2c_bus, address=0x2A, active_channels=1):
         """ Instantiate NAU7802; LDO 3v0 volts, gain 128, 10 samples per second
-        conversion rate, disabled chopper clock, low ESR caps, and PGA output
+        conversion rate, disabled ADC chopper clock, low ESR caps, and PGA output
         stabilizer cap if in single channel mode. Returns True if successful."""
         self.i2c_device = I2CDevice(i2c_bus, address)
         if not self.reset():
@@ -73,7 +73,7 @@ class NAU7802:
         self._pu_ldo_source  = True   # Internal analog power (AVDD)
         self.gain            =  128   # X128
         self._c2_conv_rate   = ConversionRate.RATE_10SPS  # 10 SPS; default
-        self._adc_chop_clock =  0x3   # 0x3 = Disable chopper clock
+        self._adc_chop_clock =  0x3   # 0x3 = Disable ADC chopper clock
         self._pga_ldo_mode   =  0x0   # 0x0 = Use low ESR capacitors
         self._act_channels   =  active_channels
         self._pc_cap_enable  =  0x1   # 0x1 = Enable PGA out stabilizer cap for single channel use
@@ -114,11 +114,16 @@ class NAU7802:
         return self._c2_chan_select + 1
     @channel.setter
     def channel(self, chan=1):
-        """Select the active channel. Valid channel numbers are 1 and 2."""
+        """Select the active channel. Valid channel numbers are 1 and 2.
+           Analog multiplexer settling time was emperically determined to be
+           approximately 400ms at 10SPS, 200ms at 20SPS, 100ms at 40SPS,
+           50ms at 80SPS, and 20ms at 320SPS."""
         if chan == 1:
             self._c2_chan_select = 0x0
+            time.sleep(0.400)  # 400ms settling time for 10SPS
         elif chan == 2 and self._act_channels == 2:
             self._c2_chan_select = 0x1
+            time.sleep(0.400)  # 400ms settling time for 10SPS
         else:
             raise ValueError("Invalid Channel Number")
             return

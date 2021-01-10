@@ -1,6 +1,6 @@
 # Clue Scale -- dual channel version
 # Cedar Grove NAU7802 FeatherWing example
-# 2021-01-07 v01 Cedar Grove Studios
+# 2021-01-10 v01 Cedar Grove Studios
 
 #import clue_scale_calibrate  # uncomment to run calibration method for channel A
 import board
@@ -53,58 +53,58 @@ scale_group.append(_background)
 
 tare_button_label = Label(FONT_1, text='T', color=clue.CYAN, max_glyphs=1)
 tare_button_label.x = 8
-tare_button_label.y = 160
+tare_button_label.y = 150
 scale_group.append(tare_button_label)
 
 zero_button_label = Label(FONT_1, text='Z', color=clue.RED, max_glyphs=1)
 zero_button_label.x = 219
-zero_button_label.y = 160
+zero_button_label.y = 150
 scale_group.append(zero_button_label)
 
-tare_button_circle = Circle(14, 159, 14, fill=None, outline=clue.CYAN, stroke=2)
+tare_button_circle = Circle(14, 149, 14, fill=None, outline=clue.CYAN, stroke=2)
 scale_group.append(tare_button_circle)
 
-zero_button_circle = Circle(225, 159, 14, fill=None, outline=clue.RED, stroke=2)
+zero_button_circle = Circle(225, 149, 14, fill=None, outline=clue.RED, stroke=2)
 scale_group.append(zero_button_circle)
 
 zero_value = Label(FONT_2, text='0', color=clue.CYAN, max_glyphs=1)
 zero_value.anchor_point      = (1.0, 0.5)
-zero_value.anchored_position = (105, 200)
+zero_value.anchored_position = ( 97, 200)
 scale_group.append(zero_value)
 
 min_value = Label(FONT_2, text=str(MIN_GR), color=clue.CYAN, max_glyphs=6)
 min_value.anchor_point      = (1.0, 1.0)
-min_value.anchored_position = (105, 239)
+min_value.anchored_position = ( 99, 239)
 scale_group.append(min_value)
 
 max_value = Label(FONT_2, text=str(MAX_GR), color=clue.CYAN, max_glyphs=6)
 max_value.anchor_point      = (1.0, 0)
-max_value.anchored_position = (105, 0)
+max_value.anchored_position = ( 99, 0)
 scale_group.append(max_value)
 
 plus_1_value = Label(FONT_2, text=str(1 * (MAX_GR // 5)), color=clue.CYAN, max_glyphs=6)
 plus_1_value.anchor_point      = (1.0, 0.5)
-plus_1_value.anchored_position = (105, 160)
+plus_1_value.anchored_position = ( 99, 160)
 scale_group.append(plus_1_value)
 
 plus_2_value = Label(FONT_2, text=str(2 * (MAX_GR // 5)), color=clue.CYAN, max_glyphs=6)
 plus_2_value.anchor_point      = (1.0, 0.5)
-plus_2_value.anchored_position = (105, 120)
+plus_2_value.anchored_position = ( 99, 120)
 scale_group.append(plus_2_value)
 
 plus_3_value = Label(FONT_2, text=str(3 * (MAX_GR // 5)), color=clue.CYAN, max_glyphs=6)
 plus_3_value.anchor_point      = (1.0, 0.5)
-plus_3_value.anchored_position = (105, 80)
+plus_3_value.anchored_position = ( 99, 80)
 scale_group.append(plus_3_value)
 
 plus_4_value = Label(FONT_2, text=str(4 * (MAX_GR // 5)), color=clue.CYAN, max_glyphs=6)
 plus_4_value.anchor_point      = (1.0, 0.5)
-plus_4_value.anchored_position = (105, 40)
+plus_4_value.anchored_position = ( 99, 40)
 scale_group.append(plus_4_value)
 
 chan_1_label = Label(FONT_0, text='grams', color=clue.BLUE, max_glyphs=6)
 chan_1_label.anchor_point      = (1.0, 0)
-chan_1_label.anchored_position = (90, 216)
+chan_1_label.anchored_position = (80, 216)
 scale_group.append(chan_1_label)
 
 chan_2_label = Label(FONT_0, text='grams', color=clue.BLUE, max_glyphs=6)
@@ -112,12 +112,12 @@ chan_2_label.anchor_point      = (1.0, 0)
 chan_2_label.anchored_position = (230, 216)
 scale_group.append(chan_2_label)
 
-chan_1_value = Label(FONT_0, text='0.00', color=clue.WHITE, max_glyphs=10)
+chan_1_value = Label(FONT_0, text='0.0', color=clue.WHITE, max_glyphs=10)
 chan_1_value.anchor_point      = (1.0, 0.5)
-chan_1_value.anchored_position = (90, 200)
+chan_1_value.anchored_position = ( 80, 200)
 scale_group.append(chan_1_value)
 
-chan_2_value = Label(FONT_0, text='0.00', color=clue.WHITE, max_glyphs=10)
+chan_2_value = Label(FONT_0, text='0.0', color=clue.WHITE, max_glyphs=10)
 chan_2_value.anchor_point      = (1.0, 0.5)
 chan_2_value.anchored_position = (230, 200)
 scale_group.append(chan_2_value)
@@ -127,25 +127,28 @@ chan_1_tare_label.anchor_point      = (1.0, 0.5)
 chan_1_tare_label.anchored_position = (80, 114)
 scale_group.append(chan_1_tare_label)
 
-chan_1_tare_value = Label(FONT_1, text='0.00', color=clue.CYAN, max_glyphs=10)
+chan_1_tare_value = Label(FONT_1, text='0.0', color=clue.CYAN, max_glyphs=10)
 chan_1_tare_value.anchor_point      = (1.0, 0.5)
 chan_1_tare_value.anchored_position = (84, 94)
 scale_group.append(chan_1_tare_value)
 
-chan_2_label = Label(FONT_1, text='tare', color=clue.BLUE, max_glyphs=4)
-chan_2_label.anchor_point      = (1.0, 0.5)
-chan_2_label.anchored_position = (224, 114)
-scale_group.append(chan_2_label)
+chan_2_tare_label = Label(FONT_1, text='tare', color=clue.BLUE, max_glyphs=4)
+chan_2_tare_label.anchor_point      = (1.0, 0.5)
+chan_2_tare_label.anchored_position = (224, 114)
+scale_group.append(chan_2_tare_label)
 
-chan_2_tare_value = Label(FONT_1, text='0.00', color=clue.CYAN, max_glyphs=10)
+chan_2_tare_value = Label(FONT_1, text='0.0', color=clue.CYAN, max_glyphs=10)
 chan_2_tare_value.anchor_point      = (1.0, 0.5)
 chan_2_tare_value.anchored_position = (224, 94)
 scale_group.append(chan_2_tare_value)
 
 # Define moveable bubble
 indicator_group = displayio.Group(max_size=2)
-indicator_bubble = Circle(120, 200, 8, fill=clue.YELLOW, outline=clue.YELLOW, stroke=2)
-indicator_group.append(indicator_bubble)
+chan_1_bubble = Circle(112, 200, 8, fill=clue.YELLOW, outline=clue.YELLOW, stroke=3)
+indicator_group.append(chan_1_bubble)
+
+chan_2_bubble = Circle(131, 200, 8, fill=clue.GREEN, outline=clue.GREEN, stroke=3)
+indicator_group.append(chan_2_bubble)
 
 scale_group.append(indicator_group)
 display.show(scale_group)
@@ -162,32 +165,26 @@ def zero_channel():
     print('...channel zeroed')
     return zero_offset
 
-def select_channel(channel=1):
-    # Selects a channel for reading.
-    nau7802.channel = channel
-    print('channel %1d selected' % (nau7802.channel))
-    return
-
 def get_tare(value=None):
     # Measure and store tare weight of current channel; return raw, grams, and ounces values
     if value is None:
         # Read average of 100 samples and store raw tare offset
         tare_offset = read(100)
         tare_state = True
-        tare_gr_value.color  = clue.CYAN
-        tare_gr_label.color  = clue.BLUE
-        tare_oz_value.color = clue.CYAN
-        tare_oz_label.color = clue.BLUE
+        chan_1_tare_value.color  = clue.CYAN
+        chan_1_tare_label.color  = clue.BLUE
+        chan_2_tare_value.color = clue.CYAN
+        chan_2_tare_label.color = clue.BLUE
     else:
         # Set raw tare offset to zero and disable tare display
         tare_offset = 0
         tare_state  = False
-        tare_gr_value.color  = clue.BLACK
-        tare_gr_label.color  = clue.BLACK
-        tare_oz_value.color = clue.BLACK
-        tare_oz_label.color = clue.BLACK
-    tare_gr_offset = round(tare_offset * CALIB_RATIO, 3)
-    tare_oz_offset = round(tare_gr_offset * 0.03527, 4)
+        chan_1_tare_value.color  = clue.BLACK
+        chan_1_tare_label.color  = clue.BLACK
+        chan_2_tare_value.color = clue.BLACK
+        chan_2_tare_label.color = clue.BLACK
+    tare_gr_offset = round(tare_offset * CALIB_RATIO_1, 1)
+    tare_oz_offset = round(tare_gr_offset * 0.03527, 2)
     return tare_offset, tare_gr_offset, tare_oz_offset
 
 def read(samples=100):
@@ -204,53 +201,66 @@ clue.pixel[0] = (16, 16, 0)  # Set status indicator to yellow
 print('    enable NAU7802 digital and analog power: %5s' % (nau7802.enable(True)))
 
 nau7802.gain = DEFAULT_GAIN  # Use default gain
-for i in range(1, 3):  # Zero and calibrate both channels
-    nau7802.channel = i
-    zero = zero_channel()
 
-nau7802.channel = DEFAULT_CHAN        # Set to default channel
-zero = zero_channel()                 # Re-calibrate and get raw zero offset value
-tare, tare_gr, tare_oz = get_tare(0)  # Disable tare subtraction and display
+nau7802.channel = 2        # Set to second channel
+chan_2_zero = zero_channel()                 # Re-calibrate and get raw zero offset value
+chan_2_tare, chan_2_tare_gr, chan_2_tare_oz = get_tare(0)  # Disable tare subtraction and display
+
+nau7802.channel = 1        # Set to first channel
+chan_1_zero = zero_channel()                 # Re-calibrate and get raw zero offset value
+chan_1_tare, chan_1_tare_gr, chan_1_tare_oz = get_tare(0)  # Disable tare subtraction and display
+
 clue.pixel[0] = (0, 16, 0)            # Set status indicator to green
-nau7802.conversion_rate = 320
 clue.play_tone(1660, 0.15)
 clue.play_tone(1440, 0.15)
 
 ### Main loop: Read sample, move bubble, and display values
 #     Monitor Zeroing and Tare buttons
 while True:
+    nau7802.channel = 2
     value   = read(SAMPLE_AVG)
-    mass_gr = round((value - zero - tare) * CALIB_RATIO, 3)
-    mass_oz = round(mass_gr * 0.03527, 4)
+    chan_2_mass_gr = round((value - chan_2_zero - chan_2_tare) * CALIB_RATIO_2, 1)
+    chan_2_mass_oz = round(chan_2_mass_gr * 0.03527, 2)
 
-    indicator_bubble.y  = int(map_range(mass_gr, MIN_GR, MAX_GR, 240, 0)) - 8
-    if mass_gr > MAX_GR or mass_gr < MIN_GR:
-        indicator_bubble.fill = clue.RED
+    chan_2_bubble.y  = int(map_range(chan_2_mass_gr, MIN_GR, MAX_GR, 240, 0)) - 8
+    if chan_2_mass_gr > MAX_GR or chan_2_mass_gr < MIN_GR:
+        chan_2_bubble.fill = clue.RED
     else:
-        indicator_bubble.fill = None
+        chan_2_bubble.fill = None
 
-    mass_gr_value.text = '%6.2f' % (mass_gr)
-    mass_oz_value.text = '%2.3f' % (mass_oz)
-    tare_gr_value.text = '%6.2f' % (tare_gr)
-    tare_oz_value.text = '%2.3f' % (tare_oz)
+    chan_2_value.text      = '%5.1f' % (chan_2_mass_gr)
+    chan_2_tare_value.text = '%5.1f' % (chan_2_tare_gr)
 
-    print('(%+6.3f, %+2.4f)' % (mass_gr, mass_oz))
-    # print('raw value:', value, hex(value))
+    nau7802.channel = 1
+    value   = read(SAMPLE_AVG)
+    chan_1_mass_gr = round((value - chan_1_zero - chan_1_tare) * CALIB_RATIO_1, 1)
+    chan_1_mass_oz = round(chan_1_mass_gr * 0.03527, 2)
+
+    chan_1_bubble.y  = int(map_range(chan_1_mass_gr, MIN_GR, MAX_GR, 240, 0)) - 8
+    if chan_1_mass_gr > MAX_GR or chan_1_mass_gr < MIN_GR:
+        chan_1_bubble.fill = clue.RED
+    else:
+        chan_1_bubble.fill = None
+
+    chan_1_value.text      = '%5.1f' % (chan_1_mass_gr)
+    chan_1_tare_value.text = '%5.1f' % (chan_1_tare_gr)
+
+    print('(%+5.1f, %+5.1f)' % (chan_1_mass_gr, chan_2_mass_gr))
 
     if clue.button_a:
         # Store tare value; click and release to tare; hold > 1 second to clear tare value
         clue.play_tone(1660, 0.3)
         clue.pixel[0] = (16, 16, 0)
-        indicator_bubble.fill = clue.YELLOW
+        chan_1_bubble.fill = clue.YELLOW
         time.sleep(1)
         if clue.button_a:
             clue.play_tone(1660, 0.3)
-            tare, tare_gr, tare_oz = get_tare(value=0)
+            chan_1_tare, chan_1_tare_gr, chan_1_tare_oz = get_tare(value=0)
         else:
-            tare, tare_gr, tare_oz = get_tare()
+            chan_1_tare, chan_1_tare_gr, chan_1_tare_oz = get_tare()
         while clue.button_a:
             time.sleep(0.1)
-        indicator_bubble.fill = None
+        chan_1_bubble.fill = None
         clue.pixel[0] = (0, 16, 0)
         clue.play_tone(1440, 0.5)
 
@@ -258,12 +268,14 @@ while True:
         # Zero and recalibrate NAU7802 chip; clear tare value
         clue.play_tone(1660, 0.3)
         clue.pixel[0] = (16, 0, 0)
-        indicator_bubble.fill = clue.RED
+        chan_1_bubble.fill = clue.RED
+        chan_2_bubble.fill = clue.RED
         zero = zero_channel()
-        tare, tare_gr, tare_oz = get_tare(0)
+        chan_1_tare, chan_1_tare_gr, chan_1_tare_oz = get_tare(0)
         while clue.button_b:
             time.sleep(0.1)
-        indicator_bubble.fill = None
+        chan_1_bubble.fill = None
+        chan_2_bubble.fill = None
         clue.pixel[0] = (0, 16, 0)
         clue.play_tone(1440, 0.5)
     pass
