@@ -2,7 +2,7 @@
 # Cedar Grove NAU7802 FeatherWing example
 # 2021-01-10 v01 Cedar Grove Studios
 
-#import clue_scale_calibrate  # uncomment to run calibration method for channel A
+#import clue_scale_calibrate  # uncomment to run calibration method for both channels
 import board
 import time
 from   simpleio                       import map_range
