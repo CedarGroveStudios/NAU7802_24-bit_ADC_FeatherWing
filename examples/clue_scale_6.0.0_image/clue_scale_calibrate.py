@@ -1,6 +1,6 @@
 # Clue Scale Calibration
 # Cedar Grove NAU7802 FeatherWing example
-# 2021-01-07 v01 Cedar Grove Studios
+# 2021-01-10 v01 Cedar Grove Studios
 
 import board
 import time
@@ -10,7 +10,6 @@ from   cedargrove_nau7802 import NAU7802
 
 clue.pixel[0] = (16, 0, 16)  # Set status indicator to purple during instantiation phase
 
-DEFAULT_CHAN =    1  # Select load cell channel input; channel A=1, channel B=2
 SAMPLE_AVG   = 1000  # Number of sample values to average
 DEFAULT_GAIN =  128  # Default gain for internal PGA
 
@@ -29,12 +28,6 @@ def zero_channel():
     print('...channel zeroed')
     return zero_offset
 
-def select_channel(channel=1):
-    # Selects a channel for reading.
-    nau7802.channel = channel
-    print('channel %1d selected' % (nau7802.channel))
-    return
-
 def read(samples=100):
     # Read and average consecutive raw sample values; return average raw value
     sum = 0
@@ -49,28 +42,41 @@ clue.pixel[0] = (16, 16, 0)  # Set status indicator to yellow
 print('    enable NAU7802 digital and analog power: %5s' % (nau7802.enable(True)))
 
 nau7802.gain    = DEFAULT_GAIN        # Use default gain
-nau7802.channel = DEFAULT_CHAN        # Set to default channel
-zero = zero_channel()                 # Re-calibrate and get raw zero offset value
+nau7802.channel = 1
+zero = zero_channel()                 # Calibrate and get raw zero offset value
+nau7802.channel = 2
+zero = zero_channel()                 # Calibrate and get raw zero offset value
 clue.pixel[0] = (0, 16, 0)            # Set status indicator to green
 clue.play_tone(1660, 0.15)
 clue.play_tone(1440, 0.15)
 
 print('GAIN:', DEFAULT_GAIN)
-print('Place the calibration weight on the Chan_A load cell')
-print('To re-zero the load cell, remove the weight and press B')
+print('Place the calibration weight on the load cell')
+print('To re-zero the load cells, remove all weights and press B')
 
-### Main loop: Read load cell and display raw value
+### Main loop: Read load cells and display raw values
 #     Monitor Zeroing button
 while True:
+    print('=====')
+    nau7802.channel = 1
     value   = read(SAMPLE_AVG)
-    print(' RAW VALUE: %7.0f  Percent of full-scale at gain x%3.0f : %3.2f: '
-          % (value, DEFAULT_GAIN, (value / ((2 ** 23) - 1)) * 100))
+    print('CHAN_%1.0f RAW VALUE: %7.0f  Percent of full-scale at gain x%3.0f : %3.2f: '
+          % (nau7802.channel, value, DEFAULT_GAIN, (value / ((2 ** 23) - 1)) * 100))
+
+    nau7802.channel = 2
+    value   = read(SAMPLE_AVG)
+    print('CHAN_%1.0f RAW VALUE: %7.0f  Percent of full-scale at gain x%3.0f : %3.2f: '
+          % (nau7802.channel, value, DEFAULT_GAIN, (value / ((2 ** 23) - 1)) * 100))
+
     time.sleep(0.1)
 
     if clue.button_b:
-        # Zero and recalibrate NAU7802 chip
+        # Zero and recalibrate both channels
         clue.play_tone(1660, 0.3)
         clue.pixel[0] = (16, 0, 0)
+        nau7802.channel = 1
+        zero = zero_channel()
+        nau7802.channel = 2
         zero = zero_channel()
         while clue.button_b:
             time.sleep(0.1)

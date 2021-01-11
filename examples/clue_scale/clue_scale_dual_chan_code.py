@@ -20,8 +20,8 @@ MAX_GR       = 100  # Maximum (full-scale) display range in grams
 MIN_GR       = ((MAX_GR // 5 ) * -1)  # Calculated minimum display value
 DEFAULT_GAIN = 128  # Default gain for internal PGA
 SAMPLE_AVG   = 100  # Number of sample values to average
-CHAN_1_LABEL = 'HEAD'  # 6 characters maximum
-CHAN_2_LABEL = 'GRIND'  # 6 characters maximum
+CHAN_1_LABEL = 'SHOT'  # 6 characters maximum
+CHAN_2_LABEL = 'BEANS'  # 6 characters maximum
 
 # Load cell dime-weight calibration ratio; 2.268 oz / ADC_raw_measurement
 # Obtained emperically; individual load cell dependent
