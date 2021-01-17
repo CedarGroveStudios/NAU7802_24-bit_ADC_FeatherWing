@@ -22,7 +22,7 @@ MAX_GR       = 100  # Maximum (full-scale) display range in grams
 MIN_GR       = ((MAX_GR // 5 ) * -1)  # Calculated minimum display value
 DEFAULT_GAIN = 128  # Default gain for internal PGA
 
-# Load cell dime-weight calibration ratio; 2.268 oz / ADC_raw_measurement
+# Load cell dime-weight calibration ratio; 2.268 gm / ADC_raw_measurement
 # Obtained emperically; individual load cell dependent
 CALIB_RATIO = 100 / 215300  # 100g at gain x128 for load cell serial#4540-02
 
