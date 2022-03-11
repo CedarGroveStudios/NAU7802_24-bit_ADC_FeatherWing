@@ -2,7 +2,10 @@
 # 2021-01-10 v01.3
 # Device driver library for the CedarGrove NAU7802 24-bit ADC FeatherWing
 # with dual analog inputs
+# https://oshpark.com/shared_projects/qFvEU3Bn  16-SOIC version
+# https://oshpark.com/shared_projects/ZfryHYnc  16-DIP  version
 # Also tested with SparkFun Quiic Scale board using a single analog input
+# https://www.sparkfun.com/products/15242
 
 import time
 import struct
