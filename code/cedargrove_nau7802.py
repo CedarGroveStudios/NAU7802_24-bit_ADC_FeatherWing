@@ -1,7 +1,7 @@
-# SPDX-FileCopyrightText: 2021, 2022 Cedar Grove Maker Studios
+# SPDX-FileCopyrightText: 2022 Cedar Grove Maker Studios
 # SPDX-License-Identifier: MIT
 
-# cedargrove_nau7802.py  2021-01-10 v1.3  Cedar Grove Maker Studios
+# cedargrove_nau7802.py  2022-04-20 v1.4  Cedar Grove Maker Studios
 
 # Device driver library for the CedarGrove NAU7802 24-bit ADC FeatherWing
 #     with dual analog inputs
@@ -243,5 +243,5 @@ class NAU7802:
             self._c2_cal_mode = CalibrationMode.GAIN
         self._c2_cal_start = True
         while self._c2_cal_start:
-            time.sleep(1.010)  # 10ms
+            time.sleep(0.010)  # 10ms
         return not self._c2_cal_error
