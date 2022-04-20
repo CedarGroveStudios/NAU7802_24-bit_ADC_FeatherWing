@@ -1,6 +1,10 @@
+# SPDX-FileCopyrightText: 2021, 2022 Cedar Grove Maker Studios
+# SPDX-License-Identifier: MIT
+
+# clue_scale_code.py  2021-01-07 v1.0  Cedar Grove Maker Studios
+
 # Clue Scale
 # Cedar Grove NAU7802 FeatherWing example
-# 2021-01-07 v01 Cedar Grove Studios
 
 #import clue_scale_calibrate  # uncomment to run calibration method
 import board

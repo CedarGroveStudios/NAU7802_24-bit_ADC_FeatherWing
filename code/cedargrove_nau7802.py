@@ -1,11 +1,14 @@
-# cedargrove_nau7802.py
-# 2021-01-10 v01.3
+# SPDX-FileCopyrightText: 2021, 2022 Cedar Grove Maker Studios
+# SPDX-License-Identifier: MIT
+
+# cedargrove_nau7802.py  2021-01-10 v1.3  Cedar Grove Maker Studios
+
 # Device driver library for the CedarGrove NAU7802 24-bit ADC FeatherWing
-# with dual analog inputs
-# https://oshpark.com/shared_projects/qFvEU3Bn  16-SOIC version
-# https://oshpark.com/shared_projects/ZfryHYnc  16-DIP  version
+#     with dual analog inputs
+#   https://oshpark.com/shared_projects/qFvEU3Bn  16-SOIC version
+#   https://oshpark.com/shared_projects/ZfryHYnc  16-DIP  version
 # Also tested with SparkFun Quiic Scale board using a single analog input
-# https://www.sparkfun.com/products/15242
+#   https://www.sparkfun.com/products/15242
 
 import time
 import struct
