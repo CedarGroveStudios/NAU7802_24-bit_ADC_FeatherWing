@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2022 Cedar Grove Maker Studios
 # SPDX-License-Identifier: MIT
 
-# cedargrove_nau7802.py  2022-04-20 v1.4  Cedar Grove Maker Studios
+# cedargrove_nau7802.py  2022-04-23 v1.5  Cedar Grove Maker Studios
 
 # Device driver library for the CedarGrove NAU7802 24-bit ADC FeatherWing
 #     with dual analog inputs
@@ -12,7 +12,6 @@
 
 import time
 import struct
-from   micropython import const
 
 from adafruit_bus_device.i2c_device import I2CDevice
 from adafruit_register.i2c_struct   import ROUnaryStruct
@@ -23,45 +22,45 @@ from adafruit_register.i2c_bit      import RWBit
 from adafruit_register.i2c_bit      import ROBit
 
 # DEVICE REGISTER MAP
-_PU_CTRL  = const(0x00)  # Power-Up Control              RW
-_CTRL1    = const(0x01)  # Control 1                     RW
-_CTRL2    = const(0x02)  # Control 2                     RW
-_ADCO_B2  = const(0x12)  # ADC_OUT[23:16]                R-
-_ADCO_B1  = const(0x13)  # ADC_OUT[16: 8]                R-
-_ADCO_B0  = const(0x14)  # ADC_OUT[ 7: 0]                R-
-_OTP_B1   = const(0x15)  # OTP[15: 8]                    R-
-_ADC      = const(0x15)  # ADC Control                   -W
-_OTP_B0   = const(0x16)  # OTP[ 7: 0]                    R-
-_PGA      = const(0x1B)  # Programmable Gain Amplifier   RW
-_PWR_CTRL = const(0x1C)  # Power Control                 RW
-_REV_ID   = const(0x1F)  # Chip Revision ID              R-
+_PU_CTRL  = 0x00  # Power-Up Control              RW
+_CTRL1    = 0x01  # Control 1                     RW
+_CTRL2    = 0x02  # Control 2                     RW
+_ADCO_B2  = 0x12  # ADC_OUT[23:16]                R-
+_ADCO_B1  = 0x13  # ADC_OUT[16: 8]                R-
+_ADCO_B0  = 0x14  # ADC_OUT[ 7: 0]                R-
+_OTP_B1   = 0x15  # OTP[15: 8]                    R-
+_ADC      = 0x15  # ADC Control                   -W
+_OTP_B0   = 0x16  # OTP[ 7: 0]                    R-
+_PGA      = 0x1B  # Programmable Gain Amplifier   RW
+_PWR_CTRL = 0x1C  # Power Control                 RW
+_REV_ID   = 0x1F  # Chip Revision ID              R-
 
 class LDOVoltage:
-    LDO_3V0 = const(0x5)  # LDO 3.0 volts; _CTRL1[5:3] = 5
-    LDO_2V7 = const(0x6)  # LDO 2.7 volts; _CTRL1[5:3] = 6
-    LDO_2V4 = const(0x7)  # LDO 2.4 volts; _CTRL1[5:3] = 7
+    LDO_3V0 = 0x5  # LDO 3.0 volts; _CTRL1[5:3] = 5
+    LDO_2V7 = 0x6  # LDO 2.7 volts; _CTRL1[5:3] = 6
+    LDO_2V4 = 0x7  # LDO 2.4 volts; _CTRL1[5:3] = 7
 
 class Gain:
-    GAIN_X1   = const(0x0)  # Gain X1; _CTRL1[2:0] = 0 (chip default)
-    GAIN_X2   = const(0x1)  # Gain X1; _CTRL1[2:0] = 1
-    GAIN_X4   = const(0x2)  # Gain X1; _CTRL1[2:0] = 2
-    GAIN_X8   = const(0x3)  # Gain X1; _CTRL1[2:0] = 3
-    GAIN_X16  = const(0x4)  # Gain X1; _CTRL1[2:0] = 4
-    GAIN_X32  = const(0x5)  # Gain X1; _CTRL1[2:0] = 5
-    GAIN_X64  = const(0x6)  # Gain X1; _CTRL1[2:0] = 6
-    GAIN_X128 = const(0x7)  # Gain X1; _CTRL1[2:0] = 7
+    GAIN_X1   = 0x0  # Gain X1; _CTRL1[2:0] = 0 (chip default)
+    GAIN_X2   = 0x1  # Gain X1; _CTRL1[2:0] = 1
+    GAIN_X4   = 0x2  # Gain X1; _CTRL1[2:0] = 2
+    GAIN_X8   = 0x3  # Gain X1; _CTRL1[2:0] = 3
+    GAIN_X16  = 0x4  # Gain X1; _CTRL1[2:0] = 4
+    GAIN_X32  = 0x5  # Gain X1; _CTRL1[2:0] = 5
+    GAIN_X64  = 0x6  # Gain X1; _CTRL1[2:0] = 6
+    GAIN_X128 = 0x7  # Gain X1; _CTRL1[2:0] = 7
 
 class ConversionRate:
-    RATE_10SPS  = const(0x0)  #  10 samples/sec; _CTRL2[6:4] = 0 (chip default)
-    RATE_20SPS  = const(0x1)  #  20 samples/sec; _CTRL2[6:4] = 1
-    RATE_40SPS  = const(0x2)  #  40 samples/sec; _CTRL2[6:4] = 2
-    RATE_80SPS  = const(0x3)  #  80 samples/sec; _CTRL2[6:4] = 3
-    RATE_320SPS = const(0x7)  # 320 samples/sec; _CTRL2[6:4] = 7
+    RATE_10SPS  = 0x0  #  10 samples/sec; _CTRL2[6:4] = 0 (chip default)
+    RATE_20SPS  = 0x1  #  20 samples/sec; _CTRL2[6:4] = 1
+    RATE_40SPS  = 0x2  #  40 samples/sec; _CTRL2[6:4] = 2
+    RATE_80SPS  = 0x3  #  80 samples/sec; _CTRL2[6:4] = 3
+    RATE_320SPS = 0x7  # 320 samples/sec; _CTRL2[6:4] = 7
 
 class CalibrationMode:
-    INTERNAL = const(0x0)  # Offset Calibration Internal; _CTRL2[1:0] = 0 (chip default)
-    OFFSET   = const(0x2)  # Offset Calibration System;   _CTRL2[1:0] = 2
-    GAIN     = const(0x3)  # Gain   Calibration System;   _CTRL2[1:0] = 3
+    INTERNAL = 0x0  # Offset Calibration Internal; _CTRL2[1:0] = 0 (chip default)
+    OFFSET   = 0x2  # Offset Calibration System;   _CTRL2[1:0] = 2
+    GAIN     = 0x3  # Gain   Calibration System;   _CTRL2[1:0] = 3
 
 class NAU7802:
     def __init__(self, i2c_bus, address=0x2A, active_channels=1):
